@@ -14,7 +14,7 @@ def getNeighbors(cell):
 def advanceBoard(board):
     new_board = set()
     neighbor_counts = defaultdict(int)
-    for cell in board:
+    for item in board: #changed _ to item
         for neighbor in getNeighbors(cell):
             neighbor_counts[neighbor]+=1
     for cell, count in neighbor_counts.items():
@@ -28,20 +28,20 @@ if __name__ == "__main__":
         for col, elem in enumerate(line):
             if elem == "X":
                 board.add(Cell(int(col), int(row)))
-    f = board
+    fixedboard = board #changed f to fixedboard
 
-    for _ in range(130):
-        f = advanceBoard(f)
+    for num in range(130): #change _ to num
+        fixedboard = advanceBoard(fixedboard)
 
-        if not f:
+        if not fixedboard:
              board_string = "empty"
         else:
             board_str = ""
-            xs = [x for (x, _) in f]
-            ys = [y for (_, y) in f]
+            xs = [x for (x, _) in fixedboard]
+            ys = [y for (_, y) in fixedboard]
             for y in range(min(ys) - pad, max(ys) + 1 + pad):
                 for x in range(min(xs) - pad, max(xs) + 1 + pad):
-                    board_str += "X" if Cell(x, y) in f else "."
+                    board_str += "X" if Cell(x, y) in fixedboard else "."
                 board_str += "\n"
             board_string = board_str.strip()
 
